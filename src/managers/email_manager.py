@@ -1,5 +1,6 @@
 from src.config.base import BaseConfiguration
 from src.utils.domain import get_domain_and_orgunit
+from src.utils.insert_student_data import insert_student_data
 
 class EmailManager(BaseConfiguration):
     
@@ -24,7 +25,8 @@ class EmailManager(BaseConfiguration):
                 try:
                     # Update student email
                     student_data = self.sophia.get_student(id=student['codigo'])
-                    # inser_student_data(data=student_data, email=email)
+                    data = insert_student_data(data=student_data, email=email)
+                    self.sophia.put_student(data=data, id=student['codigo'])
                 except Exception as err:
                     print(err)
                 
