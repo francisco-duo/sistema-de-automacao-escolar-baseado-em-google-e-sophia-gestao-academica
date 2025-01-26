@@ -1,6 +1,9 @@
 import os
 import time
 
+from src.managers.email_manager import EmailManager
+from src.managers.group_manager import GroupManager
+
 
 def inicio_letivo():
     """Função para iniciar o ano ou semestre letivo."""
@@ -23,6 +26,7 @@ def gerenciar_emails():
 
     if opcao == "1":
         print("Criando novos emails...")
+        EmailManager().create_emails()
     elif opcao == "2":
         print("Atualizando emails existentes...")
     elif opcao == "3":
@@ -44,6 +48,7 @@ def gerenciar_grupos():
 
     if opcao == "1":
         print("Criando grupos...")
+        GroupManager().create_groups()
     elif opcao == "2":
         print("Inserindo emails em grupos...")
     elif opcao == "3":
