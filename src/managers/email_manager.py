@@ -7,7 +7,7 @@ class EmailManager(BaseConfiguration):
     def create_emails(self):
         # Iterate students data
         for student in self.sophia.get_student():
-            
+
             # Verify if emails is none
             if student.get("email"):
                 continue

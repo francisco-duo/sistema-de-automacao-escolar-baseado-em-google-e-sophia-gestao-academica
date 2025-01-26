@@ -51,6 +51,7 @@ def gerenciar_grupos():
         GroupManager().create_groups()
     elif opcao == "2":
         print("Inserindo emails em grupos...")
+        GroupManager().insert_email_to_groups()
     elif opcao == "3":
         print("Removendo emails de grupos...")
     else:
