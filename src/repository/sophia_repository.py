@@ -84,12 +84,14 @@ class SophiaRepository:
             raise KeyError("url is not defiend")
 
         try:
-            response = requests.put(url, headers=self.connection, data=data).json()
+            response = requests.put(url, json=data, headers=self.connection)
             return response
         except requests.exceptions.RequestException as e:
             raise requests.exceptions.RequestException(f"Error when making the request: {e}")
         except KeyError as e:
             raise KeyError(f"Configuration error: {e}")
+        except Exception as e:
+            print(e)
 
     def get_classroom(self, params: Dict | None = None, id: str = "") -> list:
         """
@@ -132,3 +134,10 @@ class SophiaRepository:
 
         """
         return requests.get(self.environment['period'], params=params, headers=self.connection).json()
+
+
+if __name__ == "__main__":
+    sophia = SophiaRepository()
+    print(
+        sophia.put_student(id="24125", data={'codigo': 24125, 'codigoExterno': '0008118', 'nome': 'Maria Fernanda Ferreira Medeiros do Nascimento', 'utilizaNomeSocial': False, 'nomeSocial': None, 'estadoCivil': {'codigo': 1, 'descricao': 'Solteiro(a)'}, 'certidaoNascimento': '02125301552016100577117026317171', 'cpf': '080.023.281-08', 'rg': None, 'dataExpedicaoRg': None, 'orgaoExpedidorRg': None, 'rgEscolar': None, 'sexo': 'F', 'religiao': {'codigo': 4, 'descricao': 'Evangélica'}, 'raca': {'codigo': 5, 'descricao': 'Parda'}, 'dataNascimento': '2016-09-11T00:00:00', 'localNascimento': {'codigo': 1580, 'descricao': ' Brasília'}, 'ufLocalNascimento': 'DF', 'nacionalidade': {'codigo': 668, 'descricao': 'Brasileira'}, 'numeroPassaporte': None, 'paisExpedidorPassaporte': None, 'dataExpedicaoPassaporte': None, 'dataValidadePassaporte': None, 'cep': '72306-605', 'logradouro': 'Qnl 10 conjunto B lote 08', 'numeroLogradouro': '403', 'complemento': 'Residencial Algarve', 'bairro': {'codigo': 940, 'descricao': 'Taguatinga Norte (Taguatinga)'}, 'cidade': {'codigo': 1580, 'descricao': ' Brasília'}, 'uf': 'DF', 'contaOffice365': None, 'contatos': [{'tipoContato': 1, 'contato': 'dfd'}, {'tipoContato': 2, 'contato': '61985370648'}, {'tipoContato': 2, 'contato': '61991273064'}, {'tipoContato': 4, 'contato': 'teste@teste.com'}]})
+    )
